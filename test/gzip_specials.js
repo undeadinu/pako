@@ -83,4 +83,10 @@ describe('Gzip special cases', function () {
     assert(i === 2, 'invalid blobs count');
   });
 
+  it.skip('Read streamed archive', function () {
+    var data = fs.readFileSync(path.join(__dirname, 'fixtures/streamed-bgzip.txt.gz'));
+    var result = new Uint8Array(require('zlib').gunzipSync(data));
+
+    assert.deepEqual(pako.ungzip(data), result);
+  });
 });
